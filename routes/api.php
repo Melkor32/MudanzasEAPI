@@ -1,8 +1,9 @@
 <?php
 
+use App\Http\Controllers\Api\ClientController;
+use App\Http\Controllers\Api\LoginController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
-
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -14,6 +15,12 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+Route::post('login', [LoginController::class, 'login']);
+
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
+
+Route::apiResource('api/clientes', ClientController::class)
+      ->only(['index','show', 'destroy'])
+      ->middleware('auth:sanctum');
