@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Http\Resources\ClientResource;
 use App\Models\Client;
 use Illuminate\Http\Request;
 
@@ -13,7 +14,7 @@ class ClientController extends Controller
      */
     public function index()
     {
-        //
+        return ClientResource::collection(Client::latest()->paginate());
     }
 
     /**
@@ -27,9 +28,9 @@ class ClientController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Client $client)
+    public function show(Client $cliente)
     {
-        //
+        return new ClientResource( $cliente);
     }
 
     /**

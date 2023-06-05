@@ -21,6 +21,6 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::apiResource('api/clientes', ClientController::class)
+Route::apiResource('clientes', ClientController::class)
       ->only(['index','show', 'destroy'])
       ->middleware('auth:sanctum');
