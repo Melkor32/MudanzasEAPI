@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Api\ClientController;
+use App\Http\Controllers\Api\InvoicesController;
 use App\Http\Controllers\Api\LoginController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -21,6 +22,12 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::apiResource('clientes', ClientController::class)
-      ->only(['index','show', 'destroy'])
+Route::apiResource('facturas', InvoicesController::class)
+      ->only(['index','show', 'store'])
       ->middleware('auth:sanctum');
+
+Route::apiResource('clientes', ClientController::class)
+      ->only(['index','show', 'store'])
+      ->middleware('auth:sanctum');
+
+

@@ -3,19 +3,19 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
-use App\Http\Resources\ClientResource;
-use App\Models\Client;
+use App\Http\Resources\InvoicesResource;
+use App\Models\Invoices;
 use Exception;
 use Illuminate\Http\Request;
 
-class ClientController extends Controller
+class InvoicesController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        return ClientResource::collection(Client::latest()->paginate());
+        return InvoicesResource::collection(Invoices::latest()->paginate());
     }
 
     /**
@@ -25,18 +25,18 @@ class ClientController extends Controller
     {
         try{
 
-            $cliente = Client::create($request->all());
+            $factura = Invoices::create($request->all());
 
             return response()->json([
                 'status' => true,
-                'message' => "Cliente creado correctamente",
-                'data' => $cliente
+                'message' => "Factura creada correctamente",
+                'data' => $factura
             ], 200);
         }catch (Exception $e){
             return response()->json([
                 'status' => false,
-                'message' => "Error creando el cliente",
-                'data' => $cliente
+                'message' => "Error creando la factura",
+                'data' => $factura
             ], 400);
         }
     }
@@ -44,15 +44,15 @@ class ClientController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Client $cliente)
+    public function show(Invoices $factura)
     {
-        return new ClientResource($cliente);
+        return new InvoicesResource($factura);
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Client $client)
+    public function update(Request $request, Invoices $invoices)
     {
         //
     }
@@ -60,7 +60,7 @@ class ClientController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Client $client)
+    public function destroy(Invoices $invoices)
     {
         //
     }
